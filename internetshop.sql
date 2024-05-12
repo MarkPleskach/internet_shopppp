@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Апр 19 2024 г., 09:48
+-- Время создания: Май 08 2024 г., 17:16
 -- Версия сервера: 8.0.24
--- Версия PHP: 7.1.33
+-- Версия PHP: 7.4.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- База данных: `internet shop`
+-- База данных: `internetshop`
 --
 
 -- --------------------------------------------------------
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `consumers` (
   `id` int NOT NULL COMMENT 'id покупателя',
   `name` varchar(100) NOT NULL COMMENT 'ФИО',
-  delivery_address varchar(100) NOT NULL COMMENT 'Адрес доставки',
+  `delivery address` varchar(100) NOT NULL COMMENT 'Адрес доставки',
   `email` varchar(100) DEFAULT NULL COMMENT 'электронная почта'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
@@ -38,7 +38,7 @@ CREATE TABLE `consumers` (
 -- Дамп данных таблицы `consumers`
 --
 
-INSERT INTO `consumers` (`id`, `name`, delivery_address, `email`) VALUES
+INSERT INTO `consumers` (`id`, `name`, `delivery address`, `email`) VALUES
 (1, 'Плескач Марк Николаевич', 'г. Сургут, ул. Таежная д 4 к 1, кв 156 ', 'markmazic@yandex.ru'),
 (2, 'Хасанов Даниил Анфалович', 'г. Сургут, ул. Ленина 8, кв 25', 'khasanov.dan@gmail.com'),
 (3, 'Хохлова Ольга Витальевна', 'г. Сургут, ул. комсомольский проспект 34, кв 123', 'khohlova.olga@inbox.ru'),
@@ -182,6 +182,28 @@ INSERT INTO `product_order` (`id`, `id_order`, `id_product`, `quantity`, `price`
 (10, 3, 8, 1, 21482),
 (11, 4, 9, 2, 700);
 
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `user`
+--
+
+CREATE TABLE `user` (
+  `id` int NOT NULL,
+  `firstname` varchar(255) NOT NULL,
+  `lastname` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+--
+-- Дамп данных таблицы `user`
+--
+
+INSERT INTO `user` (`id`, `firstname`, `lastname`, `email`, `password`) VALUES
+(1, 'Mark', 'Mazic', 'mazic@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055'),
+(2, 'Olga', 'Khokhlova', 'olga@mail.ru', 'e10adc3949ba59abbe56e057f20f883e');
+
 --
 -- Индексы сохранённых таблиц
 --
@@ -230,6 +252,12 @@ ALTER TABLE `product_order`
   ADD KEY `product_order_ibfk_3` (`price`);
 
 --
+-- Индексы таблицы `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT для сохранённых таблиц
 --
 
@@ -268,6 +296,12 @@ ALTER TABLE `product_category`
 --
 ALTER TABLE `product_order`
   MODIFY `id` int NOT NULL AUTO_INCREMENT COMMENT 'id товара заказа', AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT для таблицы `user`
+--
+ALTER TABLE `user`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц
